@@ -2,8 +2,8 @@ openapi: 3.0.0
 
 # INFO SECTION
 info:
-  title: Sample APIs
-  version: 1.4.0
+  title: ESP APIs
+  version: 21.2.0
   description: "Sample APIs technical reference."
   license:
     name: Apache 2.0
