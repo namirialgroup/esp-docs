@@ -18,9 +18,9 @@ nav:
   - Overview: index.md
   - Getting started: configuration.md
   - Integration scenarios:
-    - Get key: integration/getkey.md
-    - Perform a login: integration/login.md
-    - Get user token: integration/token.md    
+    - Get key: integrations/getkey.md
+    - Perform a login: integrations/login.md
+    - Get user token: integrations/token.md    
   #   - Credentials: integration/credential.md
   #   - Get user detail: integration/user.md
   #   - Handle security information: integration/security.md

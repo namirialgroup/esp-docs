@@ -1,3 +1,5 @@
+# Configuration
+
 In order to use the `Esp` to provide SPID/CIE capability to your software, you need to perform the following activities:
 
 ### Assessment
