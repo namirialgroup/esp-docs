@@ -1,0 +1,5 @@
+theme: jekyll-theme-minimal
+title: Sample title
+description: sample description
+include:
+  - redocs

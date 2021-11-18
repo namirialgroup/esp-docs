@@ -1,0 +1,887 @@
+openapi: 3.0.0
+
+# INFO SECTION
+info:
+  title: Sample APIs
+  version: 1.4.0
+  description: "Sample APIs technical reference."
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# TAGS
+tags:
+  - name: Auth
+    description: Access to authentication endpoints
+    externalDocs:
+      description: Auth Documentation
+      url: https://soapfedan.github.io/gh-mkdocs/latest/integration/auth
+  - name: Credentials
+    description: Manage credentials
+    externalDocs:
+      description: Credential Documentation
+      url: https://soapfedan.github.io/gh-mkdocs/latest/integration/credential
+  - name: Account
+    description: Manage account
+    externalDocs:
+      description: Account Documentation
+      url: https://soapfedan.github.io/gh-mkdocs/latest/integration/user
+
+# PATHS
+paths:
+  # AUTH
+  /auth/realms/account/protocol/openid-connect/auth:
+    get:
+      tags:
+        -  Auth
+      summary: Starts an authorization code flow
+      parameters:
+        - in: query
+          name: client_id
+          schema:
+            type: string
+          required: true
+          description: Client identifier. Its the application that needs to authenticate a user
+          example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+        - in: query
+          name: redirect_uri
+          schema:
+            type: string
+          required: true
+          description: Uri to be redirected after successfull credentials validation
+          example: https://localhost/oauth/callback
+        - in: query
+          name: response_type
+          schema:
+            type: string
+          required: true
+          description: Parameter used to define the return value
+          example: code
+        - in: query
+          name: scope
+          schema:
+            type: string
+          required: true
+          description: Parameter used to define the scope list
+          example: openid https://scopes.account.sample.com/auth/scopes/account.readonly
+      responses:
+        '302':
+          description: Document identifier
+          headers:
+            Location:
+              description: The redirected Uri
+        '400':
+          description: Invalid input
+  /auth/realms/account/protocol/openid-connect/token:
+    post:
+      tags:
+        - Auth
+      summary: Retrieve an access token
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  description: The `authorization_code` grant type
+                  example: authorization_code
+                client_id:
+                  type: string
+                  description: The client identifier
+                  example: sample-client-oidc
+                client_secret:
+                  type: string
+                  description: The client secret
+                  example: f82cdbaf-a6e5-4220-8372-26b807751e44
+                code:
+                  type: string
+                  description: The authorization code received from the `authorize` endpoint
+                  example: fde700b1-9601-4de6-a4e1-42964c271e6f.214da810-bb48-44c1-ab0a-d0b860d9470c.88c39d01-2348-4188-aa5c-e9cba2731f91
+                scope:
+                  type: string
+                  description: The scope list
+                  example: openid https://scopes.account.sample.com/auth/scopes/account.readonly
+                redirect_uri:
+                  type: string
+                  description: The redirect uri
+                  example: http://localhost
+
+      responses:
+        '200':
+          description: The JWT Bearer response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWTBearerResponse'
+        '400':
+          description: Invalid input
+  # CREDENTIALS
+  /api/accounts/{accountId}/credentials/{scopeId}:
+    get:
+      tags:
+        - Credentials
+      summary: Get credential detail
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+        - in: path
+          name: scopeId
+          schema:
+            type: string
+          required: true
+          description: Credential identifier
+          example: base-data/mobile-phone/billing-data
+      responses:
+        '200':
+          description: Credential detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+    put:
+      tags:
+        - Credentials
+      summary: Edit account credential
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+        - in: path
+          name: scopeId
+          schema:
+            type: string
+          required: true
+          description: Credential identifier
+          example: base-data/mobile-phone/billing-data
+      responses:
+        '200':
+          description: Successfull response
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+    post:
+      tags:
+        - Credentials
+      summary: Create account credential
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+        - in: path
+          name: scopeId
+          schema:
+            type: string
+          required: true
+          description: Credential identifier
+          example: base-data/mobile-phone/billing-data
+      responses:
+        '200':
+          description: Successfull response
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+    delete:
+      tags:
+        - Credentials
+      summary: Delete account credential
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+        - in: path
+          name: scopeId
+          schema:
+            type: string
+          required: true
+          description: Credential identifier
+          example: base-data/mobile-phone/billing-data
+      responses:
+        '200':
+          description: Successfull response
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+  #Account
+  /api/accounts/new:
+    get:
+      tags:
+        - Account
+      summary: Get Signup Cookie
+      responses:
+        '200':
+          description: Set Cookie Header
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+              description: The cookie useful for signup call
+  /api/accounts:
+    post:
+      tags:
+        - Account
+      summary: Create a new account
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: header
+          name: Cookie
+          schema:
+            type: string
+          required: true
+          description: A valid Signup Cookie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The user email
+                password:
+                  type: string
+                  description: The user password
+                token:
+                  type: string
+                  description: The Recaptcha token
+                mfa:
+                  type: object
+                  properties:
+                    totp:
+                      type: boolean
+                      description: The MultiFactor Authentication parameter
+      responses:
+        '200':
+          description: User detail
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+                description: The user created identifier
+
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '400':
+          $ref: '#/components/responses/FormNotValid'
+  /api/accounts/{accountId}/send-verify-email:
+    put:
+      tags:
+        - Account
+      summary: Resend verify email
+      security:
+        - oAuth2bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Successfull response
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '400':
+          $ref: '#/components/responses/FormNotValid'
+  /api/accounts/{accountId}:
+    get:
+      tags:
+        - Account
+      summary: Get account profile
+      security:
+        - oAuth2bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Account detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetail'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+  #Security
+  /api/accounts/{accountId}/security:
+    get:
+      tags:
+        - Security
+      summary: Get security information for an account
+      security:
+        - oAuth2bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Security informations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSecurityInfo'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+    delete:
+      tags:
+        - Security
+      summary: Revoke client consent or/and two step verification
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+        - in: query
+          name: application
+          schema:
+            type: string
+          required: false
+          description: Client application name to revoke the consent. It's required only if other two are omitted.
+        - in: query
+          name: otp
+          schema:
+            type: string
+          required: false
+          description: The totp id to delete. It's required only if other two are omitted.
+        - in: query
+          name: email
+          schema:
+            type: string
+          required: false
+          description: The two factor email method id to delete. It's required only if other two are omitted.
+      responses:
+        '200':
+          description: Successfull response
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+    put:
+      tags:
+        - Security
+      summary: Enable Totp for two step authentication
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: string
+                  description: Otp type (email or totp)
+      responses:
+        '200':
+          description: Successfull response
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+  #MFA
+  /api/accounts/{accountId}/challenge:
+    get:
+      tags:
+        - MFA
+      summary: Get challenge id and expired time for the otp token
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: query
+          name: type
+          schema: 
+            type: string
+          required: false
+          description: The otp type, it should be "email" or "sms" (default)
+          example: email
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Challenge information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MFAInfo'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+  /api/accounts/{accountId}/challenge/{challengeId}:
+    post:
+      tags:
+        - MFA
+      summary: Otp retrieve from sms validation
+      security:
+        - oAuth2bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: string
+          required: true
+          description: Account identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+        - in: path
+          name: challengeId
+          schema:
+            type: string
+          required: true
+          description: Challenge identifier
+          example: e2c906fa-e4c8-4508-b1fe-8e516b88fba4
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: string
+                  description: The otp token retrieve from sms
+      responses:
+        '200':
+          description: Successfull response
+        '400':
+          $ref: '#/components/responses/FormNotValid'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+  #Spid
+  /api/spid:
+    get:
+      tags:
+        - Spid
+      summary: Start a signup flow with Namirial ID
+      parameters:
+        - in: query
+          name: idpName
+          schema:
+            type: string
+          required: true
+          description: The identity provider name.
+          example: Dev
+      responses:
+        '302':
+          description: Redirection to Idp
+          headers:
+            Location:
+              description: The redirected Uri
+        '400':
+          description: Invalid input
+    post:
+      tags:
+        - Spid
+      summary: Create new user with Namirial ID information
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                SAMLResponse:
+                  type: string
+                  description: The Saml response returned by idp 
+                RelayState:
+                  type: string
+                  description: The relay state
+      responses:
+        '302':
+          description: Redirection to sample account page
+          headers:
+            Location:
+              description: The redirected Uri
+        '400':
+          description: Invalid input
+
+externalDocs:
+  description: Official Sample documentation
+  url: https://soapfedan.github.io/gh-mkdocs/latest/
+servers:
+  - url: https://account-apis-test.sample.com
+    description: (Development)
+components:
+  securitySchemes:
+    cookieAuth: # arbitrary name for the security scheme; will be used in the "security" key later
+      type: apiKey
+      in: cookie
+      name: NAMIRIAL_ACCOUNT  # cookie name
+    oAuth2bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:   # <---- OAuth flow(authorizationCode)
+          authorizationUrl: /auth/realms/account/protocol/openid-connect/auth
+          tokenUrl: /auth/realms/account/protocol/openid-connect/token
+          scopes:
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials: # <---- OAuth flow(clientCredentials)
+          tokenUrl: /auth/realms/account/protocol/openid-connect/token
+          scopes:
+            auth:read: Read auth
+    basicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    FormNotValid:
+      description: The input form is invalid
+    ForbiddenError:
+      description: User has not permission to access to the entity
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+  schemas:
+    JWTBearerResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Access token
+        refresh_token:
+          type: string
+          description: Refresh token
+        token_type:
+          type: string
+          description: Token type
+        expires_in:
+          type: integer
+          description: The life time of token in seconds
+    CredentialResponse:
+      type: object
+      properties:
+        baseCredentials:
+          type: object
+          properties:
+            firstName:
+              type: string
+              description: "The user first name that called the API"
+            lastName:
+              type: string
+              description: "The user last name that called the API"
+            countryOfBirth:
+              type: string
+              description: "The user country of birth that called the API"
+            birthPlace:
+              type: string
+              description: "The user birth place that called the API"
+            dateOfBirth:
+              type: string
+              description: "The user date of birth that called the API"
+            fiscalCode:
+              type: string
+              description: "The user fiscal code that called the API"
+        mobileCredentials:
+          type: object
+          properties:
+            id:
+              type: string
+              description: "The user mobile id that called the API"
+            mobile:
+              type: string
+              description: "The user mobile number that called the API"
+            status:
+              type: string
+              description: "The user mobile status that called the API"
+        billingCredentials:
+          type: object
+          properties:
+            id:
+              type: string
+              description: "The user billing id that called the API"
+            vatCode:
+              type: string
+              description: "The user vat code that called the API"
+            streetAddress:
+              type: string
+              description: "The user street address that called the API"
+            countryOfResidence:
+              type: string
+              description: "The user country of residence that called the API"
+            cityOfResidence:
+              type: string
+              description: "The user city of residence that called the API"
+            postalCode:
+              type: string
+              description: "The user postal code that called the API"
+            status:
+              type: string
+              description: "The user billing status that called the API"
+    AccountDetail:
+      type: object
+      properties:
+        email:
+          type: string
+          description: "The user email that called the API"
+        id:
+          type: string
+          description: "The user id that called the API"
+        baseCredentials:
+          type: object
+          properties:
+            firstName:
+              type: string
+              description: "The user first name that called the API"
+            lastName:
+              type: string
+              description: "The user last name that called the API"
+            countryOfBirth:
+              type: string
+              description: "The user country of birth that called the API"
+            birthPlace:
+              type: string
+              description: "The user birth place that called the API"
+            dateOfBirth:
+              type: string
+              description: "The user date of birth that called the API"
+            fiscalCode:
+              type: string
+              description: "The user fiscal code that called the API"
+        mobileCredentials:
+          type: object
+          properties:
+            id:
+              type: string
+              description: "The user mobile id that called the API"
+            mobile:
+              type: string
+              description: "The user mobile number that called the API"
+            status:
+              type: string
+              description: "The user mobile status that called the API"
+        billingCredentials:
+          type: object
+          properties:
+            id:
+              type: string
+              description: "The user billing id that called the API"
+            vatCode:
+              type: string
+              description: "The user vat code that called the API"
+            streetAddress:
+              type: string
+              description: "The user street address that called the API"
+            countryOfResidence:
+              type: string
+              description: "The user country of residence that called the API"
+            cityOfResidence:
+              type: string
+              description: "The user city of residence that called the API"
+            postalCode:
+              type: string
+              description: "The user postal code that called the API"
+            status:
+              type: string
+              description: "The user billing status that called the API"
+    AccountSecurityInfo:
+      type: object
+      properties:
+        twoStepVerifications:
+          type: array
+          description: "A list of two step verification methods"
+          maxItems: 3
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/twoStepVerification'
+            discriminator:
+              propertyName: objectType
+        trustedApplications:
+          type: array
+          description: "A list of trusted applications"
+          maxItems: 4
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/trustedApplication'
+            discriminator:
+              propertyName: objectType
+        devices:
+          type: array
+          description: "A list of devices where user signed in"
+          maxItems: 5
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/device'
+            discriminator:
+              propertyName: objectType
+        otpsManager:
+          type: array
+          description: "A list of otp information"
+          maxItems: 3
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/otpManager'
+            discriminator:
+              propertyName: objectType
+    twoStepVerification:
+      type: object
+      properties:
+        type:
+          type: string
+          description: "The type of two step verification"
+          example: "otp"
+        description:
+          type: string
+          description: "Some information about the two step verification"
+        active:
+          type: boolean
+          description: "Status of the two step verification"
+    trustedApplication:
+      type: object
+      properties:
+        application:
+          type: string
+          description: "Application name"
+        accessGiven:
+          type: integer
+          description: "The access given timestamp"
+        lastUse:
+          type: integer
+          description: "The last access timestamp"
+        trust:
+          type: boolean
+          description: "The status of the application"
+    device:
+      type: object
+      properties:
+        deviceName:
+          type: string
+          description: "The device name"
+        ipAddress:
+          type: string
+          description: "The ip address"
+        lastUse:
+          type: integer
+          description: "The last use timestamp"
+        osInfo:
+          type: string
+          description: "The operating system information"
+        browserInfo:
+          type: string
+          description: "The browser name"
+    otpManager:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "The id of the otp method"
+        type:
+          type: string
+          description: "The type"
+          example: "password"
+        status:
+          type: string
+          description: "The status of the otp method"
+    MFAInfo:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: "The challenge identifier"
+          example: "e2c906fa-e4c8-4508-b1fe-8e516b88fba4"
+        expiredTime:
+          type: string
+          description: "The date time expiration for the otp token"
+          example: "07/23/2021 10:07:53"

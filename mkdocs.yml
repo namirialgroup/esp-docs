@@ -1,0 +1,31 @@
+site_name: Sample doc 1.4.0
+
+theme:
+  name: 'material'
+
+site_author: 'Namiral'
+site_url: ''
+remote_branch: gh-pages
+edit_uri: 'tree/main/docs/'
+
+
+# markdown_extensions:
+#   - codehilite
+#   - pymdownx.superfences
+#   - admonition
+
+nav:
+  - Overview: index.md
+  - Getting started: configuration.md
+  - Integration scenarios:
+    - Get key: integration/getkey.md
+    - Perform a login: integration/login.md
+    - Get user token: integration/token.md    
+  #   - Credentials: integration/credential.md
+  #   - Get user detail: integration/user.md
+  #   - Handle security information: integration/security.md
+  #   - Multi Factor Authentication: integration/mfa.md
+  - Changelog : changelog.md
+  # - Previous versions: ../
+  - API Reference : apis.html
+    
