@@ -59,20 +59,10 @@ paths:
             text/html:
               schema:
                 $ref: '#/components/schemas/GetKeyResponse'
-        '400 Error code 1':
-          description: final url empty
-        '400 Error code 2':
-          description: level param invalid
-        '400 Error code 3':
-          description: attributes invalid
-        '403 Error code 4':
-          description: authn key invalid
-        '403 Error code 5':
-          description: authn key refers to an invalid service provider
-        '403 Error code 6':
-          description: authn key missing
-        '403 Error code 11':
-          description: level mismatch between level parameter and authnkey  
+        '400':
+          description: The input parameters are missing or invalid
+        '403':
+          description: The SSL certificate is missing or invalid
 
   # Login
   /<environment_name>/spid_login.php:
@@ -112,14 +102,29 @@ paths:
       responses:
         '200':
           description: It starts an authentication process with a url redirect
-        '400 Error code 7-8':
-          description: generic authentication errors
-        '400 Error code 9':
-          description: missing redirect type
-        '403 Error code 10':
-          description: spid level < authnkey level
-        '403 Error code 12':
-          description: spid level refer to an active session < authnkey level
+        '400':
+          description: Wrong parameters
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/InvaidFinal'
+                  - $ref: '#/components/responses/InvalidLevel'
+                  - $ref: '#/components/responses/InvalidAttributes'
+                  - $ref: '#/components/responses/GenericAuthError'
+                  - $ref: '#/components/responses/RedirectUriMissing'
+        '403':
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/InvalidAuthnKey'
+                  - $ref: '#/components/responses/AuthnKeyMismatch'
+                  - $ref: '#/components/responses/MissingAuthnKey'
+                  - $ref: '#/components/responses/UnderLevel'
+                  - $ref: '#/components/responses/LevelMismatch'
+                  - $ref: '#/components/responses/CurrentSessionLevel'
           
   /<environment_name>/cie_login.php:
     get:
@@ -158,14 +163,29 @@ paths:
       responses:
         '200':
           description: It starts an authentication process with a url redirect
-        '400 Error code 7-8':
-          description: generic authentication errors
-        '400 Error code 9':
-          description: missing redirect type
-        '403 Error code 10':
-          description: spid level < authnkey level
-        '403 Error code 12':
-          description: spid level refer to an active session < authnkey level
+        '400':
+          description: Wrong parameters
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/InvaidFinal'
+                  - $ref: '#/components/responses/InvalidLevel'
+                  - $ref: '#/components/responses/InvalidAttributes'
+                  - $ref: '#/components/responses/GenericAuthError'
+                  - $ref: '#/components/responses/RedirectUriMissing'
+        '403':
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/InvalidAuthnKey'
+                  - $ref: '#/components/responses/AuthnKeyMismatch'
+                  - $ref: '#/components/responses/MissingAuthnKey'
+                  - $ref: '#/components/responses/UnderLevel'
+                  - $ref: '#/components/responses/LevelMismatch'
+                  - $ref: '#/components/responses/CurrentSessionLevel'
  
   #Get User
   /sslprotected/<environment_name>/getUser.php:
@@ -200,9 +220,13 @@ paths:
         '400':
           description: missing key or ID parameter
         '403':
-          description: SSL authentication error
-        '403 Error code 3':
-          description: missing session for key and id provided
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/SSLError'
+                  - $ref: '#/components/responses/CurrentSessionLevel'
 
 externalDocs:
   description: Official ESP documentation
@@ -218,8 +242,32 @@ components:
       type: http
       scheme: basic    
   responses:
-    ForbiddenError:
-      description: System has not permission to access to the entity
+    InvaidFinal:
+      description: Error code 1 - Invalid final url
+    InvalidLevel:
+      description: Error code 2 - Invalid level parameter
+    InvalidAttributes:
+      description: Error code 3 - Invalid attributes parameter
+    InvalidAuthnKey:
+      description: Error code 4 - Invalid authn key
+    AuthnKeyMismatch:
+      description: Error code 5 - The authn key has a mismatch with the SP configuration
+    MissingAuthnKey:
+      description: Error code 6 - The authn key is missing
+    GenericAuthError:
+      description: Error code 7/8 - Generic authentication error
+    RedirectUriMissing:
+      description: Error code 9 - The SP redirect uri misses into the configuration
+    UnderLevel:
+      description: Error code 10 - The authentication level obtained from lower SPID to what is requested through authnKey
+    LevelMismatch:
+      description: Error code 11 - There is a level mismatch between requested level and authn key level
+    CurrentSessionLevel:
+      description: Error code 12 - The authentication level of a SPID session already active not corresponding to the currently requested level
+    KeyIdNotFound:
+      description: Error code 3 - The session is missing for input key and ID parameters
+    SSLError:
+      description: SSL authentication error
   schemas:
     GetKeyResponse:
       type: string

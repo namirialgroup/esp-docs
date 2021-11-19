@@ -6,7 +6,6 @@ theme:
 site_author: 'Namiral'
 site_url: ''
 remote_branch: gh-pages
-edit_uri: 'esp-docs/blob/main/docs/'
 
 
 # markdown_extensions:
