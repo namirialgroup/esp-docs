@@ -4,7 +4,7 @@ This endpoint return a session key that should be used to start a authentication
 The following http GET call must be made to start the authentication round. Since the call is protected, the ssl certificate provided during [Assessment](../configuration.md) must be used.
 
 
-> **GET sslprotected/<environment_name>/getKey.php**
+> **GET sslprotected/environment_name/getKey.php**
 
 #### Parameters
 

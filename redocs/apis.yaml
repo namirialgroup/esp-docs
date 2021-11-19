@@ -59,9 +59,20 @@ paths:
             text/html:
               schema:
                 $ref: '#/components/schemas/GetKeyResponse'
-        '403':
-          description: Unauthorized
-          $ref: '#/components/responses/ForbiddenError'
+        '400 Error code 1':
+          description: final url empty
+        '400 Error code 2':
+          description: level param invalid
+        '400 Error code 3':
+          description: attributes invalid
+        '403 Error code 4':
+          description: authn key invalid
+        '403 Error code 5':
+          description: authn key refers to an invalid service provider
+        '403 Error code 6':
+          description: authn key missing
+        '403 Error code 11':
+          description: level mismatch between level parameter and authnkey  
 
   # Login
   /<environment_name>/spid_login.php:
@@ -101,8 +112,14 @@ paths:
       responses:
         '200':
           description: It starts an authentication process with a url redirect
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
+        '400 Error code 7-8':
+          description: generic authentication errors
+        '400 Error code 9':
+          description: missing redirect type
+        '403 Error code 10':
+          description: spid level < authnkey level
+        '403 Error code 12':
+          description: spid level refer to an active session < authnkey level
           
   /<environment_name>/cie_login.php:
     get:
@@ -141,14 +158,20 @@ paths:
       responses:
         '200':
           description: It starts an authentication process with a url redirect
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
+        '400 Error code 7-8':
+          description: generic authentication errors
+        '400 Error code 9':
+          description: missing redirect type
+        '403 Error code 10':
+          description: spid level < authnkey level
+        '403 Error code 12':
+          description: spid level refer to an active session < authnkey level
  
   #Get User
   /sslprotected/<environment_name>/getUser.php:
     get:
       tags:
-        -  Get User
+        -  Get user
       summary: Get a user JWT
       security:
         - sslCertificate: [ ]
@@ -174,9 +197,12 @@ paths:
             text/html:
               schema:
                 $ref: '#/components/schemas/JWTBearerResponse'
+        '400':
+          description: missing key or ID parameter
         '403':
-          description: Unauthorized
-          $ref: '#/components/responses/ForbiddenError'
+          description: SSL authentication error
+        '403 Error code 3':
+          description: missing session for key and id provided
 
 externalDocs:
   description: Official ESP documentation

@@ -2,7 +2,7 @@
 
 The next step is to authenticate with the service you are integrating (SPID/CIE) then you have to build an address formed by different parameters.
 
-> **GET <environment_name>/<login_file>.php**
+> **GET environment_name/login_file.php**
 
 #### Parameters
 

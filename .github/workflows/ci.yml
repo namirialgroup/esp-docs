@@ -15,8 +15,6 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - run: git fetch --all
-      - run: git reset --hard origin/gh-pages
       - run: mkdocs build
       - run: cp redocs/* site/
-      - run: ghp-import site --push
+      - run: ghp-import site --push --force
