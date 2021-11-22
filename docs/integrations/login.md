@@ -22,3 +22,12 @@ Name | Description
 The address that is constructed must then be copied and pasted into the address bar of a browser. The page that opens can be
 - login screen with SPID
 - login screen with CIE
+
+# Login Succeded
+
+After a succeded login the user will be redirected to the final url parameter. 
+The parameters that will be returned with querystring should be:
+
+- a session id and user key parameter, if the configuration has redirect type set to `TOKEN`. Now you have to call the [token](./token.md) API, if you want the JSON Web Token
+
+- a jwt token parameter, if the configuration has redirect type set to `JWT`. Now you have the JWT with the user info. You can see an example of this JWT at the [token](./token.md) section.
