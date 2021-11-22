@@ -105,8 +105,9 @@ paths:
           content:
             text/html:
               schema:
-                $ref: '#/components/schemas/JWTBearerResponse'
-                $ref: '#/components/schemas/SessionIdKeyResponse'
+                oneOf:
+                  - $ref: '#/components/schemas/JWTBearerResponse'
+                  - $ref: '#/components/schemas/SessionIdKeyResponse'
         '400':
           description: Wrong parameters
           content:
@@ -171,8 +172,9 @@ paths:
           content:
             text/html:
               schema:
-                $ref: '#/components/schemas/JWTBearerResponse'
-                $ref: '#/components/schemas/SessionIdKeyResponse'
+                oneOf:
+                  - $ref: '#/components/schemas/JWTBearerResponse'
+                  - $ref: '#/components/schemas/SessionIdKeyResponse'
         '400':
           description: Wrong parameters
           content:
