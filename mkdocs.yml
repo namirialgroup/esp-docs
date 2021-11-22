@@ -9,7 +9,7 @@ remote_branch: gh-pages
 # Repository
 repo_name: 'ESP-DOC'
 repo_url: https://github.com/namirialgroup/esp-docs
-edit_uri: ‘tree/main/docs/’
+edit_uri: tree/main/docs/
 
 # markdown_extensions:
 #   - codehilite
