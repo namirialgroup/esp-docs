@@ -23,7 +23,7 @@ The address that is constructed must then be copied and pasted into the address 
 - login screen with SPID
 - login screen with CIE
 
-# Login Succeded
+## Login Succeded
 
 After a succeded login the user will be redirected to the final url parameter. 
 The parameters that will be returned with querystring should be:
