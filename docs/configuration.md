@@ -8,7 +8,7 @@ Furthermore, the required security level (L1 - L2 - L3 for SPID OR L3 for CIE) a
 
 ### Setup Test Environment
 Namirial will prepare the test environment and start the verifications based on the data provided and will send to the customer the accesses for the Test environment, together with:
-1. CCA certified (for each aggregate if needed);
+1. SSL certified (for each aggregate if needed);
 2. Dedicated endpoints of the API and for the redirect of the user during the SPID authentication phase (for each aggregate if needed);
 3. Test metadata to be published on a URL in https: // relating to the customer domain. This URL will be indicated in the SPID/CIE membership request email to be sent to the SPID/CIE Technical Institute (for each aggregate if needed).
 Once the integration phase has been completed and the correct functioning on the customer side has been ascertained, Namirial will take care of communications with SPID/CIE Technical Institute for testing the environment, requesting, on behalf of the customer, to join SPID/CIE as a Service Provider.

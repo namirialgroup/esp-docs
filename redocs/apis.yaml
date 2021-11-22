@@ -226,7 +226,7 @@ paths:
               schema:
                 oneOf:
                   - $ref: '#/components/responses/SSLError'
-                  - $ref: '#/components/responses/CurrentSessionLevel'
+                  - $ref: '#/components/responses/KeyIdNotFound'
 
 externalDocs:
   description: Official ESP documentation
