@@ -286,8 +286,8 @@ components:
       example: c1BUQkJ4d3hYUWV6ZEQ4TktlSWV6ZmozVy9HNzNrQlcyRFlvMTB1TTlGKzE3dWNjdHNLV2RUN0pVNTNJQnhsVnNMMWhBS0lucGNxMC9qY0c3U3BWYlc5dktOMXFvVkhyYUIrdDFBd1VBWGM5bERzS1RnVzd1V251R3pWUEpiUmc
     JWTBearerResponse:
       type: string
-      example: jwt that contains the SAML Assertion attributes
+      description: jwt that contains the SAML Assertion attributes
     SessionIdKeyResponse:
       type: string
-      example: querystring with session key and id
+      description: querystring with session key and id
     
