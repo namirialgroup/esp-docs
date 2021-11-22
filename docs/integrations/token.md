@@ -17,7 +17,8 @@ Name | Description
  The [JWT](https://jwt.io/introduction) is a signed token that contains the user information. Signed tokens can verify the integrity of the claims contained within it. JSON Web Tokens are a good way of securely transmitting information between parties.
  A sample of GET-USER-JWT content is the following:
 
- ```
+
+``` js
 {
   "dateOfBirth": "1900-11-19",
   "domicileMunicipality": "ANCONA",
@@ -42,6 +43,8 @@ Name | Description
   "reqId": "_e709d704aa3b47eda307203119a987ac",
   "assertionId": "_71ce2354dd3222a0db8477dcb1441fec"
 }
- ```
+
+```
+
 
 You can check from the JWT content using the [jwt-io-debugger](https://jwt.io/#debugger-io). You can copy and paste the token and you can see its content.

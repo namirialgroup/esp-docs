@@ -2,6 +2,8 @@ site_name: ESP 21.2.0
 
 theme:
   name: 'material'
+  features:
+    - content.code.annotate
 
 site_author: 'Namiral'
 site_url: ''
@@ -11,12 +13,15 @@ repo_name: 'ESP-DOC'
 repo_url: https://github.com/namirialgroup/esp-docs
 edit_uri: tree/main/docs/
 
-# markdown_extensions:
-#   - codehilite
-#   - pymdownx.superfences
-#   - admonition
 markdown_extensions:
-  - mdx_truly_sane_lists
+  - codehilite
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - admonition
+#markdown_extensions:
+#  - mdx_truly_sane_lists
 
 nav:
   - Overview: index.md
