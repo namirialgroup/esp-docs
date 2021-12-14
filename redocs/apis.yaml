@@ -65,7 +65,7 @@ paths:
           description: The SSL certificate is missing or invalid
 
   # Login
-  /<environment_name>/spid_login.php:
+  /<environment_name>/spidlogin.php:
     get:
       tags:
         - Login
@@ -132,7 +132,7 @@ paths:
                   - $ref: '#/components/responses/LevelMismatch'
                   - $ref: '#/components/responses/CurrentSessionLevel'
           
-  /<environment_name>/cie_login.php:
+  /<environment_name>/cielogin.php:
     get:
       tags:
         - Login
