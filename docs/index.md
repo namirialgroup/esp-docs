@@ -1,6 +1,6 @@
 # ESP
 
-ESP is an implementation of a Service Provider that wraps the [Shibboleth SP 2](https://shibboleth.atlassian.net/wiki/spaces/SHIB2/overview) software.
+ESP is an implementation of a Service Provider that wraps the [spid-aspnetcore](https://github.com/italia/spid-aspnetcore) library.
 
 ## Authentication methods 
 
