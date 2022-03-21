@@ -3,7 +3,7 @@ openapi: 3.0.0
 # INFO SECTION
 info:
   title: ESP APIs
-  version: 21.2.0
+  version: 22.1.0
   description: "ESP APIs technical reference."
   license:
     name: Apache 2.0
@@ -31,6 +31,41 @@ tags:
 paths:
   # GET KEY
   /sslprotected/<environment_name>/getKey.php:
+    get:
+      tags:
+        -  Get Key
+      summary: Get a authn key to start an authentication flow
+      deprecated: true
+      security:
+        - sslCertificate: [ ]
+      parameters:
+        - in: query
+          name: level
+          schema:
+            type: string
+          required: true
+          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed)
+          example: 1
+        - in: query
+          name: attributes
+          schema:
+            type: string
+          required: true
+          description: The attribute parameter (Basic-Full)
+          example: Full
+      responses:
+        '200':
+          description: The authn key
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/GetKeyResponse'
+        '400':
+          description: The input parameters are missing or invalid
+        '403':
+          description: The SSL certificate is missing or invalid
+
+  /sslprotected/<environment_name>/getKey:
     get:
       tags:
         -  Get Key
@@ -69,7 +104,8 @@ paths:
     get:
       tags:
         - Login
-      summary: Login with SPID with a browser 
+      summary: Login with SPID/EIDAS with a browser 
+      deprecated: true
       parameters:
         - in: query
           name: level
@@ -137,6 +173,7 @@ paths:
       tags:
         - Login
       summary: Login with CIE with a browser
+      deprecated: true
       parameters:
         - in: query
           name: level
@@ -198,9 +235,138 @@ paths:
                   - $ref: '#/components/responses/UnderLevel'
                   - $ref: '#/components/responses/LevelMismatch'
                   - $ref: '#/components/responses/CurrentSessionLevel'
+  
+  /<environment_name>/spidlogin:
+    get:
+      tags:
+        - Login
+      summary: Login with SPID with a browser 
+      parameters:
+        - in: query
+          name: final
+          schema:
+            type: string
+          required: true
+          description: It's the redirect url called at the end of the authentication process (It should be comunicated during the assessment phase) 
+          example: http://localhost
+        - in: query
+          name: authnKey
+          schema:
+            type: string
+          required: true
+          description: It's the authn key that has been given at the get key endpoint
+          example: c1BUQkJ4d3hYUWV6ZEQ4TktlSWV6ZmozVy9HNzNrQlcyRFlvMTB1TTlGKzE3dWNjdHNLV2RUN0pVNTNJQnhsVnNMMWhBS0lucGNxMC9qY0c3U3BWYlc5dktOMXFvVkhyYUIrdDFBd1VBWGM5bERzS1RnVzd1V251R3pWUEpiUmc
+      responses:
+        '200':
+          description: Login successful
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/JWTBearerResponse'
+                  - $ref: '#/components/schemas/SessionIdKeyResponse'
+        '400':
+          description: Wrong parameters
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/InvalidParameter'
+        '403':
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/SSLError'
+          
+  /<environment_name>/cielogin:
+    get:
+      tags:
+        - Login
+      summary: Login with CIE with a browser
+      parameters:
+        - in: query
+          name: final
+          schema:
+            type: string
+          required: true
+          description: It's the redirect url called at the end of the authentication process (It should be comunicated during the assessment phase)
+          example: http://localhost
+        - in: query
+          name: authnKey
+          schema:
+            type: string
+          required: true
+          description: It's the authn key that has been given at the get key endpoint
+          example: c1BUQkJ4d3hYUWV6ZEQ4TktlSWV6ZmozVy9HNzNrQlcyRFlvMTB1TTlGKzE3dWNjdHNLV2RUN0pVNTNJQnhsVnNMMWhBS0lucGNxMC9qY0c3U3BWYlc5dktOMXFvVkhyYUIrdDFBd1VBWGM5bERzS1RnVzd1V251R3pWUEpiUmc
+      responses:
+        '200':
+          description: Login successful
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/JWTBearerResponse'
+                  - $ref: '#/components/schemas/SessionIdKeyResponse'
+        '400':
+          description: Wrong parameters
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/InvalidParameter'
+        '403':
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/SSLError'
  
   #Get User
   /sslprotected/<environment_name>/getUser.php:
+    get:
+      tags:
+        -  Get user
+      summary: Get a user JWT
+      deprecated: true
+      security:
+        - sslCertificate: [ ]
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: true
+          description: The ESP user identifier
+          example: _ecf182c0024338b109397ea3d04ab141
+        - in: query
+          name: key
+          schema:
+            type: string
+          required: true
+          description: The ESP session key
+          example: _029da15302d1f7bf8a4ff9826b4489c3
+      responses:
+        '200':
+          description: The authn key
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/JWTBearerResponse'
+        '400':
+          description: missing key or ID parameter
+        '403':
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/SSLError'
+                  - $ref: '#/components/responses/KeyIdNotFound'
+                    
+  /sslprotected/<environment_name>/getUser:
     get:
       tags:
         -  Get user
@@ -240,6 +406,7 @@ paths:
                   - $ref: '#/components/responses/SSLError'
                   - $ref: '#/components/responses/KeyIdNotFound'
 
+  
 externalDocs:
   description: Official ESP documentation
   url: https://namirialgroup.github.io/esp-docs/
@@ -254,6 +421,8 @@ components:
       type: http
       scheme: basic    
   responses:
+    InvalidParameter:
+      description: Invalid Request Parameter
     InvaidFinal:
       description: Error code 1 - Invalid final url
     InvalidLevel:

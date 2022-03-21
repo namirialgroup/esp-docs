@@ -1,6 +1,6 @@
 # Get Key
 
-This endpoint return a session key that should be used to start a authentication process with SPID or CIE.
+This endpoint return a session key that should be used to start a authentication process with SPID, CIE or EIDAS.
 The following http GET call must be made to start the authentication round. Since the call is protected, the ssl certificate provided during [Assessment](../configuration.md) must be used.
 
 
@@ -14,6 +14,10 @@ Name | Description
  **environment_name** | The environment path
  **level** | It's the authentication level (L1-L2-L3)
  **attributes** | It's the attribute level (Base-Full)
+ **spidType** | It's the spid purpose value (optional -  default is SpidType 1 or physical person) (https://www.agid.gov.it/sites/default/files/repository_files/spid-avviso-n18_v.2-_autenticazione_persona_giuridica_o_uso_professionale_per_la_persona_giuridica.pdf)
+
+### N.B.
+The spidType parameter is usefull only for SPID AUTHENTICATION
 
 
 ## Result

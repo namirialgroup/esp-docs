@@ -4,7 +4,7 @@ In order to use the `Esp` to provide SPID/CIE capability to your software, you n
 
 ### Assessment
 During the assessment phase, all the information and data are collected that must be communicated to AgID (SPID) or Istituto Poligrafico (CIE) via e-mail and entered in the metadata, that is the configuration file for the service.
-Furthermore, the required security level (L1 - L2 - L3 for SPID OR L3 for CIE) and the set of SPID/CIE attributes required during authentication (BASIC or FULL according to the SPID attributes table or eIDAS Minimum set for CIE).
+Furthermore, the required security level (L1 - L2 - L3 for SPID OR L3 for CIE) and the set of SPID/CIE/EIDAS attributes required during authentication (BASIC or FULL according to the SPID attributes table or eIDAS Minimum set for CIE).
 
 ### Setup Test Environment
 Namirial will prepare the test environment and start the verifications based on the data provided and will send to the customer the accesses for the Test environment, together with:
@@ -15,12 +15,14 @@ Namirial will prepare the test environment and start the verifications based on 
 
 3. Test metadata to be published on a URL in https: // relating to the customer domain. This URL will be indicated in the SPID/CIE membership request email to be sent to the SPID/CIE Technical Institute (for each aggregate if needed).
 
-Once the integration phase has been completed and the correct functioning on the customer side has been ascertained, Namirial will take care of communications with SPID/CIE Technical Institute for testing the environment, requesting, on behalf of the customer, to join SPID/CIE as a Service Provider.
+Once the integration phase has been completed and the correct functioning on the customer side has been ascertained, Namirial will take care of communications with SPID/CIE/EIDAS Technical Institute for testing the environment, requesting, on behalf of the customer, to join SPID/CIE/EIDAS as a Service Provider.
 
 ### Testing
 SPID/CIE Technical Institute will carry out the tests both on the adherence of the SAML SPID protocol (carried out within ESP), and on the creation of the customer portal that integrates ESP, outside the Namirial perimeter. It will communicate any requests for clarification, discrepancies and so on to the technical reference indicated by Namirial.
 
-### Deploy in production SPID
+### Deploy in production SPID/EIDAS
+
+***The EIDAS authentication method is currently available only for public administration institute***
 
 Namirial, for each private and aggregator customer, deals with the generation of the CSR file (Certificate Signing Request), for the purpose of compiling the Registration Request document, since it is necessary to make a request to generate a production Electronic Seal certificate to the AgID to be used in the application. of ESP production. In the PDF Registration Request, it is by Namirial to fill in the fields: As; Type of Certificate; CSR hash described in the AgID procedure to be included in the Registration Request;
 The Customer must send the AgID a second certified email (on which he will receive more detailed information), with a ZIP file attached;
