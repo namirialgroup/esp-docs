@@ -104,7 +104,7 @@ paths:
     get:
       tags:
         - Login
-      summary: Login with SPID/EIDAS with a browser 
+      summary: Login with SPID with a browser 
       deprecated: true
       parameters:
         - in: query
@@ -240,7 +240,7 @@ paths:
     get:
       tags:
         - Login
-      summary: Login with SPID with a browser 
+      summary: Login with SPID/EIDAS with a browser 
       parameters:
         - in: query
           name: final

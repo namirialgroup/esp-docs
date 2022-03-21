@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - Old php engine
 
-## [21.2.0] - Unreleased
+## [21.2.0] - 2021-12-24
 
 ### Added
 - Fixed security problems
