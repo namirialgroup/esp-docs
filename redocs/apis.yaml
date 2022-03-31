@@ -87,6 +87,13 @@ paths:
           required: true
           description: The attribute parameter (Basic-Full)
           example: Full
+        - in: query
+          name: spidType
+          schema:
+            type: string
+          required: true
+          description: The SPID SAML Purpose value
+          example: F - LP - PG - PF - PX
       responses:
         '200':
           description: The authn key
