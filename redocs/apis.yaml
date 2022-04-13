@@ -21,6 +21,11 @@ tags:
     externalDocs:
       description: Login Documentation
       url: https://namirialgroup.github.io/esp-docs/integrations/login
+  - name: Logout
+    description: Logout
+    externalDocs:
+      description: Logout Documentation
+      url: https://namirialgroup.github.io/esp-docs/integrations/logout
   - name: Get user
     description: Get user endpoint
     externalDocs:
@@ -330,7 +335,32 @@ paths:
               schema:
                 oneOf:
                   - $ref: '#/components/responses/SSLError'
- 
+  
+  #Logout
+  /<environment_name>/logout:
+    get:
+      tags:
+        - Logout
+      summary: Logout for SPID with a browser 
+      parameters:
+        - in: query
+          name: final
+          schema:
+            type: string
+          required: true
+          description: It's the redirect url called at the end of the authentication process (It should be comunicated during the assessment phase) 
+          example: http://localhost    
+      responses:
+        '200':
+          description: Logout successful        
+        '400':
+          description: Wrong parameters
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/InvalidParameter'       
+
   #Get User
   /sslprotected/<environment_name>/getUser.php:
     get:
