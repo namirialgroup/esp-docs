@@ -29,7 +29,8 @@ nav:
   - Integration scenarios:
     - Get key: integrations/getkey.md
     - Perform a login: integrations/login.md
-    - Get user token: integrations/token.md    
+    - Get user token: integrations/token.md
+    - Logout: integrations/logout.md
   #   - Credentials: integration/credential.md
   #   - Get user detail: integration/user.md
   #   - Handle security information: integration/security.md
