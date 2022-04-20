@@ -449,8 +449,12 @@ externalDocs:
   url: https://namirialgroup.github.io/esp-docs/
 servers:
   - url: https://esp-saas.test.namirialtsp.com
+    description: (Test Saas)
+  - url: https://esp.test.namirialtsp.com
     description: (Test)
   - url: https://esp-saas.namirialtsp.com
+    description: (Prod Saas)
+  - url: https://esp.namirialtsp.com
     description: (Prod)
 components:
   securitySchemes:

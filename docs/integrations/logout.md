@@ -10,7 +10,7 @@ Name | Description
 ------------- | -------------
  **domain_uri** | The ESP domain uri
  **environment_name** | The environment path
- **final_url** | It's the redirect url called at the end of the authentication process (It should be comunicated during the assessment phase)
+ **final** | It's the redirect url called at the end of the authentication process (It should be comunicated during the assessment phase)
 
 ## Result
 
