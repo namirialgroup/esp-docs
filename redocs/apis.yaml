@@ -56,7 +56,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The attribute parameter (Basic-Full)
+          description: The attribute parameter (Base-Full)
           example: Full
       responses:
         '200':
@@ -131,7 +131,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The attribute parameter (Basic-Full)
+          description: The attribute parameter (Base-Full)
           example: Full
         - in: query
           name: final
@@ -199,7 +199,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The attribute parameter (Basic-Full)
+          description: The attribute parameter (Base-Full)
           example: Full
         - in: query
           name: final
