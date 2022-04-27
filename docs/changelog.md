@@ -1,10 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [22.1.0] - Unreleased
+## [22.1.1] - Unreleased
+
+### Added 
+- Added fiscalcode
+
+### Removed
+- Removed nbf from JWT token
+
+## [22.1.0] - 2022-04-26
 
 ### Added 
 - New C# engine
+- DataProtection with Database
 
 ### Changed
 - UI full refactoring
