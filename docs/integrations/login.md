@@ -16,7 +16,7 @@ Name | Description
  **(Deprecated)login_file** | The login file used for the authentication (like cielogin-spidlogin)
  **login_method** | The login file used for the authentication (like cielogin-spidlogin)
  **final** | It's the redirect url called at the end of the authentication process (It should be comunicated during the assessment phase)
- **(Deprecated)level** | It's the authentication level (L1-L2-L3)
+ **(Deprecated)level** | It's the authentication level (1-2-3)
  **(Deprecated)attributes** | It's the attribute level (Base-Full)
  **authnKey** | It's the authn key that has been given at the [getkey](./getkey.md) endpoint
 

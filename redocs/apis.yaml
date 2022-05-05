@@ -49,7 +49,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed)
+          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed!)
           example: 1
         - in: query
           name: attributes
@@ -83,7 +83,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed)
+          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed!)
           example: 1
         - in: query
           name: attributes
@@ -124,7 +124,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed)
+          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed!)
           example: 1
         - in: query
           name: attributes
@@ -192,7 +192,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed)
+          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed!)
           example: 1
         - in: query
           name: attributes
@@ -341,7 +341,7 @@ paths:
     get:
       tags:
         - Logout
-      summary: Logout for SPID with a browser 
+      summary: Logout for SPID with a browser (NOT NECESSARY FOR SECOND LEVEL AUTHENTICATIONS!)
       parameters:
         - in: query
           name: final

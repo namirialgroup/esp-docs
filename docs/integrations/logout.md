@@ -1,6 +1,6 @@
 # Logout
 
-This page contains the reference for the logout SPID method
+This page contains the reference for the logout SPID method (NOT NECESSARY FOR SECOND LEVEL AUTHENTICATIONS!)
 
 > **GET environment_name/logout**
 
