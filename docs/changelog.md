@@ -1,7 +1,31 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [22.1.1] - Unreleased
+
+## [22.3.0] - Unreleased
+
+### Added
+- Api Key Feature
+
+## [22.2.0] - 2022-6-30
+
+### Changed
+- Bug Fixing
+
+## [22.1.3] - 2022-6-6
+
+### Changed
+- Bug Fixing
+
+## [22.1.2] - 2022-5-19
+
+### Changed
+- Bug Fixing
+
+## [22.1.1] - 2022-5-12
+
+### Changed
+- Bug Fixing
 
 ### Added 
 - Added fiscalcode
