@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Api Key Feature
 
+## [22.2.1] - Unreleased
+
+### Added
+- Spid Minori support
+
 ## [22.2.0] - 2022-6-30
 
 ### Changed
