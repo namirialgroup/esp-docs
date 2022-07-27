@@ -1,5 +1,4 @@
-site_name: ESP 22.2.1
-
+site_name: ESP 22.3.0
 theme:
   name: 'material'
   features:

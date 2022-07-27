@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 
-## [22.3.0] - Unreleased
+## [22.3.0] - 2022-07-27
 
 ### Added
 - Api Key Feature

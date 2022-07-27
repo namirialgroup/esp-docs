@@ -3,7 +3,7 @@ openapi: 3.0.0
 # INFO SECTION
 info:
   title: ESP APIs
-  version: 22.2.1
+  version: 22.3.0
   description: "ESP APIs technical reference."
   license:
     name: Apache 2.0
@@ -75,6 +75,7 @@ paths:
       tags:
         -  Get Key
       summary: Get a authn key to start an authentication flow
+      deprecated: true
       security:
         - sslCertificate: [ ]
       parameters:
@@ -110,6 +111,53 @@ paths:
           description: The input parameters are missing or invalid
         '403':
           description: The SSL certificate is missing or invalid
+
+  /api/secure/<environment_name>/getKey:
+    get:
+      tags:
+        -  Get Key
+      summary: Get a authn key to start an authentication flow
+      security:
+        - ApiKeyAuth: [ ]
+      parameters:
+        - in: header
+        - in: query
+          name: level
+          schema:
+            type: string
+          required: true
+          description: The authentication level. It should be refered to L1-L2-L3 (The L letter should be removed!)
+          example: 1
+        - in: query
+          name: attributes
+          schema:
+            type: string
+          required: true
+          description: The attribute parameter (Base-Full)
+          example: Full
+        - in: query
+          name: spidType
+          schema:
+            type: string
+          required: false
+          description: The SPID SAML Purpose value
+          example: F - LP - PG - PF - PX
+      responses:
+        '200':
+          description: The authn key
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/GetKeyResponse'
+        '400':
+          description: The input parameters are missing or invalid
+        '403':
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/ApiKeyError'
 
   # Login
   /<environment_name>/spidlogin.php:
@@ -451,6 +499,7 @@ paths:
       tags:
         -  Get user
       summary: Get a user JWT
+      deprecated: true
       security:
         - sslCertificate: [ ]
       parameters:
@@ -486,6 +535,46 @@ paths:
                   - $ref: '#/components/responses/SSLError'
                   - $ref: '#/components/responses/KeyIdNotFound'
 
+  /api/secure/<environment_name>/getUser:
+    get:
+      tags:
+        -  Get user
+      summary: Get a user JWT
+      security:
+        - ApiKeyAuth: [ ]
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: true
+          description: The ESP user identifier
+          example: _ecf182c0024338b109397ea3d04ab141
+        - in: query
+          name: key
+          schema:
+            type: string
+          required: true
+          description: The ESP session key
+          example: _029da15302d1f7bf8a4ff9826b4489c3
+      responses:
+        '200':
+          description: The authn key
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/JWTBearerResponse'
+        '400':
+          description: missing key or ID parameter
+        '403':
+          description: Forbidden error
+          content:
+            text/html:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/ApiKeyError'
+                  - $ref: '#/components/responses/KeyIdNotFound'
+
   
 externalDocs:
   description: Official ESP documentation
@@ -501,6 +590,10 @@ servers:
     description: (Prod)
 components:
   securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: Esp-Api-Key  # name of the header, query parameter or cookie
     sslCertificate: # arbitrary name for the security scheme
       type: http
       scheme: basic    
@@ -533,6 +626,8 @@ components:
       description: Error code 3 - The session is missing for input key and ID parameters
     SSLError:
       description: SSL authentication error
+    ApiKeyError:
+      description: ApiKey authentication error
   schemas:
     GetKeyResponse:
       type: string
