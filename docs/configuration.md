@@ -9,7 +9,7 @@ Furthermore, the required security level (L1 - L2 - L3 for SPID OR L3 for CIE) a
 ### Setup Test Environment
 Namirial will prepare the test environment and start the verifications based on the data provided and will send to the customer the accesses for the Test environment, together with:
 
-1. SSL certified (for each aggregate if needed);
+1. ApiKey (for each aggregate if needed);
 
 2. Dedicated endpoints of the API and for the redirect of the user during the SPID authentication phase (for each aggregate if needed);
 
