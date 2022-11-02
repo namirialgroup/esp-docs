@@ -39,3 +39,19 @@ After that the CIE tech team integrates your informations to the prod CIE identi
 
 ### Go live!
 Service Provider are now live, now your users can authenticate to your application with SPID or CIE.
+
+
+## Aggregated Section
+
+**This part is only for Aggregated Environments**
+
+In order to use the `Esp` to provide SPID capability to your software,
+ you need to perform the following activities:
+
+- Compile the assessment document provided by Namirial
+- Namirial should create a specific suite for testing purposes (test users and a test enviroment)
+- The customer should perform its testing activities
+- When the previous step is completed the customer must give feedback to Namirial to go in production
+- Namirial prepares the aggregated production enviroment 
+- Namirial comunicates to Agid the new Aggregate
+- Agid propagates to all the identity provider the new aggregate metadata
