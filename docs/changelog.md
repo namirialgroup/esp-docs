@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [22.3.1] - Unreleased
+
+- Aggregated/Aggregator feature
 
 ## [22.3.0] - 2022-07-27
 
