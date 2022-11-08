@@ -1,9 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [22.3.1] - Unreleased
+## [22.3.1] - 2022-11-08
 
 - Aggregated/Aggregator feature
+- Download Certs
+- PT SPID Settembre 2022
+- Refactor Aggregator
+- Download Agid Zip
+- Add User Section
+- Removed ForceAuthn Internal Service
 
 ## [22.3.0] - 2022-07-27
 
