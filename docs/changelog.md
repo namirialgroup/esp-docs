@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [22.3.3] - 2022-11-30
+
+### Changed
+- Datadog fixes
+- Spid Minori fixes
+
 ## [22.3.2] - 2022-11-22
 
 ### Changed

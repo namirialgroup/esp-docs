@@ -3,7 +3,7 @@ openapi: 3.0.0
 # INFO SECTION
 info:
   title: ESP APIs
-  version: 22.3.2
+  version: 22.3.3
   description: "ESP APIs technical reference."
   license:
     name: Apache 2.0
