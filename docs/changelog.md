@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [22.3.4] - 2023-01-10
+
+### Changed
+- Logout bug fixes
+- Demo app fixes
+- Datadog ASM fix
+
 ## [22.3.3] - 2022-11-30
 
 ### Changed
