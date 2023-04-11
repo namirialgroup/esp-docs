@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [23.0.1] - 2023-04-06
+
+### Changed
+- Added support for CIE LVL 1/2
+
+
 ## [22.3.4] - 2023-01-10
 
 ### Changed
