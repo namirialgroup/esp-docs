@@ -3,7 +3,7 @@ openapi: 3.0.0
 # INFO SECTION
 info:
   title: ESP APIs
-  version: 23.0.2
+  version: 23.1.0
   description: "ESP APIs technical reference."
   license:
     name: Apache 2.0
@@ -302,6 +302,13 @@ paths:
         - Login
       summary: Login with SPID/EIDAS with a browser 
       parameters:
+        - in: query
+          name: reference
+          schema:
+            type: string
+          required: false
+          description: It's client reference, useful for customer billing purpose
+          example: mycustomer
         - in: query
           name: final
           schema:
