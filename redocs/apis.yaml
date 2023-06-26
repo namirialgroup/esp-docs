@@ -307,7 +307,7 @@ paths:
           schema:
             type: string
           required: false
-          description: It's client reference, useful for customer billing purpose
+          description: It's client reference, useful for customer billing purpose. It should follow the regex pattern [A-Za-z0-9]. Max 50 chars
           example: mycustomer
         - in: query
           name: final
