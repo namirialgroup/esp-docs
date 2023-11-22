@@ -1,8 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [23.1.3] - 2023-08-28
 
-## [23.1.0] - Unreleased
+### Added
+- Added prefix to getTransaction method
+
+## [23.1.2] - 2023-07-06
+
+### Changed
+- Fixed regex
+
+## [23.1.1] - 2023-06-27
+
+### Added
+- Added reference to db
+
+## [23.1.0] - 2023-06-26
 
 ### Added
 - Reference parameter for spid login
