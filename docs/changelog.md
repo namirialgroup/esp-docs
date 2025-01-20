@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [24.2.0] - 2024-11-24
+- Common bugfixes
+
 ## [23.1.3] - 2023-08-28
 
 ### Added
