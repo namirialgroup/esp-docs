@@ -24,17 +24,4 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
-  - Getting started: configuration.md
-  - Integration scenarios:
-    - Get key: integrations/getkey.md
-    - Perform a login: integrations/login.md
-    - Get user token: integrations/token.md
-    - Logout: integrations/logout.md
-  #   - Credentials: integration/credential.md
-  #   - Get user detail: integration/user.md
-  #   - Handle security information: integration/security.md
-  #   - Multi Factor Authentication: integration/mfa.md
-  - Changelog : changelog.md
-  # - Previous versions: ../
-  - API Reference [OBSOLETE] : apis.html
     
