@@ -1,5 +1,5 @@
-> [!WARNING]
-> This documentation is obsolete, you should use the new doc here https://docs.namirial.app/products/esp/homepage
+
+> :warning: This documentation is obsolete, you should use the new doc here https://docs.namirial.app/products/esp/homepage
 
 # ESP
 

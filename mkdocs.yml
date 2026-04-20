@@ -36,5 +36,5 @@ nav:
   #   - Multi Factor Authentication: integration/mfa.md
   - Changelog : changelog.md
   # - Previous versions: ../
-  - API Reference : apis.html
+  - API Reference [OBSOLETE] : apis.html
     
