@@ -1,0 +1,8 @@
+openapi: 3.0.0
+
+# INFO SECTION
+info:
+  title: ESP APIs
+  version: 24.2.0
+  description: "## ⚠️ WARNING
+    **This documentation is obsolete, you should use the new doc [here](https://docs.namirial.app/products/esp/openapi)**"
