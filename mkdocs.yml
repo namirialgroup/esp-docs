@@ -23,5 +23,6 @@ markdown_extensions:
 #  - mdx_truly_sane_lists
 
 nav:
-  - Overview: index.md
+  - Overview: index.md  
+  - API Reference [OBSOLETE] : apis.html
     
